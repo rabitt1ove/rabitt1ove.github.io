@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A0F18" />
+    <title>rabitt1ove — Indie iOS Developer</title>
+    <meta
+      name="description"
+      content="rabitt1ove のアプリ開発ポートフォリオ。MuscleTrace ほか iOS アプリを開発しています。"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="rabitt1ove — Indie iOS Developer" />
+    <meta
+      property="og:description"
+      content="rabitt1ove のアプリ開発ポートフォリオ。"
+    />
+    <meta property="og:url" content="https://rabitt1ove.github.io/" />
+
+    <link rel="icon" type="image/png" href="assets/muscletrace-icon.png" />
+
+    <style>
+      :root {
+        --bg: #0a0f18;
+        --bg-elevated: #141a26;
+        --surface: #1b2230;
+        --surface-2: #232b3b;
+        --text: #f5f6f9;
+        --text-secondary: #a8afbf;
+        --text-tertiary: #6b7488;
+        --accent: #ff6b1a;
+        --accent-hi: #ffb347;
+        --accent-glow: #ffd580;
+        --hairline: rgba(255, 255, 255, 0.08);
+        --radius-md: 16px;
+        --radius-lg: 24px;
+        --radius-xl: 32px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Hiragino Sans",
+          "Noto Sans JP", sans-serif;
+        font-feature-settings: "palt";
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            ellipse 80% 50% at 50% 0%,
+            rgba(255, 107, 26, 0.15),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 50% 100%,
+            rgba(46, 90, 172, 0.15),
+            transparent 60%
+          ),
+          var(--bg);
+      }
+
+      .container {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: clamp(40px, 8vw, 96px) 24px 80px;
+      }
+
+      /* Hero */
+      .hero {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .hero-eyebrow {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(255, 107, 26, 0.12);
+        border: 1px solid rgba(255, 107, 26, 0.35);
+        margin-bottom: 20px;
+      }
+
+      .hero-title {
+        font-size: clamp(36px, 7vw, 56px);
+        font-weight: 900;
+        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+
+      .hero-title .accent {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-hi) 50%,
+          var(--accent-glow) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(14px, 2.2vw, 17px);
+        color: var(--text-secondary);
+        max-width: 540px;
+        margin: 0 auto;
+      }
+
+      /* Section */
+      .section {
+        margin: 64px 0;
+      }
+
+      .section-title {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin: 0 0 20px;
+        padding-left: 8px;
+      }
+
+      /* App grid */
+      .app-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+
+      .app-card {
+        background: var(--bg-elevated);
+        border: 0.5px solid var(--hairline);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .app-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 26, 0.06),
+          transparent 40%
+        );
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+      }
+
+      .app-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 107, 26, 0.35);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      }
+
+      .app-card:hover::before {
+        opacity: 1;
+      }
+
+      .app-card-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .app-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      }
+
+      .app-name {
+        font-size: 18px;
+        font-weight: 800;
+        margin: 0 0 2px;
+      }
+
+      .app-tag {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-tertiary);
+        letter-spacing: 0.5px;
+      }
+
+      .app-desc {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      .app-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 4px;
+        font-size: 12px;
+        color: var(--text-tertiary);
+      }
+
+      .app-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+      }
+
+      .app-status .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 6px var(--accent);
+      }
+
+      .app-status.coming .dot {
+        background: var(--text-tertiary);
+        box-shadow: none;
+      }
+
+      /* Coming soon placeholder */
+      .app-card.placeholder {
+        background: transparent;
+        border: 1px dashed rgba(255, 255, 255, 0.12);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--text-tertiary);
+        min-height: 200px;
+        gap: 8px;
+      }
+
+      .app-card.placeholder:hover {
+        transform: none;
+        border-color: rgba(255, 107, 26, 0.3);
+        box-shadow: none;
+      }
+
+      .placeholder-plus {
+        font-size: 32px;
+        font-weight: 200;
+        color: var(--text-tertiary);
+      }
+
+      .placeholder-text {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      /* About */
+      .about {
+        background: var(--bg-elevated);
+        border: 0.5px solid var(--hairline);
+        border-radius: var(--radius-lg);
+        padding: 28px;
+      }
+
+      .about p {
+        margin: 0 0 12px;
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .about p:last-child {
+        margin-bottom: 0;
+      }
+
+      .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .skill {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--surface);
+        border: 0.5px solid var(--hairline);
+        color: var(--text-secondary);
+        letter-spacing: 0.3px;
+      }
+
+      /* Links / contact */
+      .link-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .link-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background: var(--bg-elevated);
+        border: 0.5px solid var(--hairline);
+        border-radius: 999px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.15s ease;
+      }
+
+      .link-pill:hover {
+        background: var(--surface);
+        border-color: rgba(255, 107, 26, 0.35);
+        transform: translateY(-1px);
+      }
+
+      .link-pill.primary {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-hi) 100%
+        );
+        border-color: transparent;
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 6px 18px rgba(255, 107, 26, 0.4);
+      }
+
+      .link-pill.primary:hover {
+        background: linear-gradient(
+          135deg,
+          var(--accent-hi) 0%,
+          var(--accent-glow) 100%
+        );
+        border-color: transparent;
+      }
+
+      .link-arrow {
+        font-size: 11px;
+        opacity: 0.7;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 96px;
+        padding: 24px 0;
+        border-top: 0.5px solid var(--hairline);
+        font-size: 12px;
+        color: var(--text-tertiary);
+        text-align: center;
+      }
+
+      footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 600px) {
+        .app-card {
+          padding: 20px;
+        }
+
+        .about {
+          padding: 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="container">
+      <section class="hero">
+        <span class="hero-eyebrow">Indie iOS Developer</span>
+        <h1 class="hero-title">
+          rabitt<span class="accent">1ove</span>
+        </h1>
+        <p class="hero-subtitle">
+          身近な習慣を支える iOS アプリを個人開発しています。<br />
+          すべてプライバシー重視で、データは端末内に閉じる設計。
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Apps</h2>
+        <div class="app-grid">
+          <a
+            class="app-card"
+            href="https://github.com/rabitt1ove/MuscleTrace-PP/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="app-card-head">
+              <img
+                class="app-icon"
+                src="assets/muscletrace-icon.png"
+                alt="MuscleTrace icon"
+              />
+              <div>
+                <h3 class="app-name">MuscleTrace</h3>
+                <div class="app-tag">FITNESS · iOS</div>
+              </div>
+            </div>
+            <p class="app-desc">
+              3Dアニメ調キャラと一緒に筋トレを記録できる iPhone
+              アプリ。ヒートマップで継続が可視化され、習慣化を後押し。
+            </p>
+            <div class="app-footer">
+              <span class="app-status"
+                ><span class="dot"></span>Available on iOS</span
+              >
+              <span class="link-arrow">↗</span>
+            </div>
+          </a>
+
+          <div class="app-card placeholder" aria-hidden="true">
+            <div class="placeholder-plus">＋</div>
+            <div class="placeholder-text">MORE COMING SOON</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">About</h2>
+        <div class="about">
+          <p>
+            個人で iOS アプリを企画・設計・開発しています。
+            データは端末内に閉じる設計、習慣化を支える UX、
+            Apple のヒューマンインターフェースガイドラインを尊重したデザインを大切にしています。
+          </p>
+          <p>
+            技術スタックや関心領域は以下のとおりです。
+          </p>
+          <div class="skill-list">
+            <span class="skill">Swift</span>
+            <span class="skill">SwiftUI</span>
+            <span class="skill">SQLite</span>
+            <span class="skill">UNNotifications</span>
+            <span class="skill">StoreKit</span>
+            <span class="skill">UI / UX</span>
+            <span class="skill">Localization</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Contact</h2>
+        <div class="link-row">
+          <a
+            class="link-pill primary"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf7qGUR3RXbl_qFUiUzgR4MeM_0Ms0FCdBQtdv5CMddhdoPlQ/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            お問い合わせフォーム <span class="link-arrow">↗</span>
+          </a>
+          <a
+            class="link-pill"
+            href="https://github.com/rabitt1ove"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub <span class="link-arrow">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> rabitt1ove. All rights reserved. ·
+        <a href="app-ads.txt">app-ads.txt</a>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
